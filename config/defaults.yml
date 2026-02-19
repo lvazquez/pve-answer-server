@@ -1,0 +1,14 @@
+---
+##################################
+## defaults answer config     ##
+##################################
+
+
+# global cluster config
+network_dns: "10.10.10.1"
+network_gateway: "10.10.10.1"
+
+
+# server specific config
+server_hostname: 'node01.example.com'
+server_address: '10.10.20.101/24'

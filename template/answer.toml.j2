@@ -1,0 +1,23 @@
+[global]
+keyboard = "en-us"
+country = "us"
+reboot-mode = "power-off"
+fqdn = "{{ server_hostname }}"
+mailto = "admin@noc.livewiretech.com"
+timezone = "America/New_York"
+root-password = "Inf0.S0p.Inf0.LWC"
+root-ssh-keys = [
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCpzRQlZs86NLed/MazmwPBVSMsm6V4kzfOPkPRqlJsVq/v+RgIl5MzNz7KEolfMrjEpuptWDIeC1oa4TlXsx7oYq2QX2uXo8BXgReZit3PgrSrLp7pLCLM2GdXS8YS0KssKK/b8KTP4EuQ/W7w5dVYGfM3vVrfi5bbchi3kpZIH/ggTODSXlK7X6ZBSjVzJpcRyvZKYXFhKwjvjrVWlKAp+w+JLLE4UuqJWI9XHRsZ1HlNsMdKENZefDsUgnL2d1MgpqTnXKk69/lvKX564A47hhZ9A6rAlndizuTAIECfacMDOoXQ1BCEsX+qiqCdOE3ewzfJG0TH5/+S/IW+pvGrHJULM57rzg7YQ9rtACJLepG/oynb+LaeQIAG7J6c0N50GEhHfy9R3bEQMWLQHoAKDr1arEt0/7jWRYeXsTMDCIKpqQ6Zca2TdCcyoWutEYpuU/e6v1uhKNZBZ6S2YYmm0LPIbP56ULcHi3C8bMP9maW8idouqa9X/XsjygxHFQk= root@custos-pve-mgr.noc.livewiretech.com",
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC/rCX6xYAPo6ODrtQvX6zvbMmPUWRexMdodSEodNSa0iCNRz4q/uCz2q+PcYpg8n3qwbpTwNyQVwRAmUp3Fmo0xw5LkElge8z7Df8bRdkEL1KQn2H29lAAoxHwuscxUyaCDbh6/dYNw+uLiNF/uEszieAVP2cZWSeG+qhe9nnvQd/DyEpkkWJaG5NpwE/L9Sd82iEmtA493FNRpqa8joO9dq0lplb8fg45mjL5vbaQQP0kaUmTaQzEOG1Z53WafxEdC4ti/3dOJxaZY+XO4Ty2timVqAuPYU3CGnEyTERMEmTgxC8iH+4OYN5JzMVp0Q8ehCmusVfdTQbVj9I1tk7r lvazquez@work"
+]
+
+[network]
+source = "from-answer"
+dns = "{{ network_dns }}"
+gateway = "{{ network_gateway }}"
+cidr = "{{ server_address }}"
+
+[disk-setup]
+filesystem = "ext4"
+disk-list = ["sda"]
+
