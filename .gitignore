@@ -211,3 +211,6 @@ __marimo__/
 pyvenv.cfg
 bin/
 lib64
+
+# Git token
+.git-token
