@@ -207,9 +207,9 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 
-# python venv config
+# Ignore Python venv files
 pyvenv.cfg
-bin/
+bin/*
 lib64
 
 # Git token
@@ -218,3 +218,5 @@ lib64
 # logs and run time files
 log/*.log
 
+# But do not ignore our binary files
+!bin/pve-answer-run.sh
