@@ -1,0 +1,12 @@
+---
+########################################
+## CUST-MIA1-TESTNODE1 - DELL R640    ##
+########################################
+
+# global cluster config
+network_dns: "172.31.31.99"
+network_gateway: "172.31.31.99"
+
+server_hostname: "pve-node04.noc.livewiretech.com"
+server_address: "172.31.31.21/24"
+

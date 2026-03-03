@@ -12,7 +12,10 @@ root-ssh-keys = [
 ]
 
 [network]
-source = "from-dhcp"
+source = "from-answer"
+dns = "{{ network_dns }}"
+gateway = "{{ network_gateway }}"
+cidr = "{{ server_address }}"
 
 [disk-setup]
 filesystem = "ext4"
