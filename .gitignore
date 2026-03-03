@@ -214,3 +214,7 @@ lib64
 
 # Git token
 .git-token
+
+# logs and run time files
+log/*.log
+
