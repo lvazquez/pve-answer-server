@@ -5,10 +5,10 @@
 
 
 # global cluster config
-network_dns: "10.10.10.1"
-network_gateway: "10.10.10.1"
+network_dns: "172.31.31.99"
+network_gateway: "172.31.31.99"
 
 
 # server specific config
 server_hostname: 'node01.example.com'
-server_address: '10.10.20.101/24'
+server_address: '"172.31.31.199/24'

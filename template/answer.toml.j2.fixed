@@ -13,9 +13,10 @@ root-ssh-keys = [
 
 [network]
 source = "from-answer"
+cidr = "{{ server_address }}"
 dns = "{{ network_dns }}"
 gateway = "{{ network_gateway }}"
-cidr = "{{ server_address }}"
+filter.ID_NET_NAME_MAC = "*{{ pve_mac_address | replace(':', '') | lower }}"
 
 [disk-setup]
 filesystem = "ext4"
