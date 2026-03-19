@@ -18,14 +18,15 @@ except ImportError as e:
 # Configuration Paths
 CONFIG_DIR = pathlib.Path("./config")
 DEFAULT_CONFIG_PATH = CONFIG_DIR / "defaults.yml"
-TEMPLATE_FILE_PATH = pathlib.Path("./template/answer.toml.j2")
+TEMPLATE_PATH_FIXED = pathlib.Path("./template/answer.toml.j2.fixed")
+TEMPLATE_PATH_DHCP = pathlib.Path("./template/answer.toml.j2.dhcp")
 
 routes = web.RouteTableDef()
 
 # Setup Jinja2 Environment
 # StrictUndefined ensures an error is raised if a template variable is missing
 jinja_env = Environment(
-    loader=FileSystemLoader(str(TEMPLATE_FILE_PATH.parent)),
+    loader=FileSystemLoader(str(TEMPLATE_PATH_FIXED.parent)),
     undefined=StrictUndefined 
 )
 
@@ -83,10 +84,10 @@ def create_answer(request_data: dict) -> str:
     # If MAC-specific config is found, merge it over defaults
     if mac_config is not None:
         final_config.update(mac_config)
-        
         # Dynamically inject the matched MAC into the configuration dictionary.
         final_config['pve_mac_address'] = mac_matched
     else:
+        jinja_env
         logging.info("No MAC-specific config found. Using default values only.")
 
     # Check for mandatory parameters
@@ -95,9 +96,14 @@ def create_answer(request_data: dict) -> str:
         if field not in final_config:
             raise KeyError(f"Missing mandatory configuration field: '{field}'")
 
+
+        
     # Render Template using the filename part of our Path variable
     try:
-        template = jinja_env.get_template(TEMPLATE_FILE_PATH.name)
+        if mac_config is not None:
+            template = jinja_env.get_template(TEMPLATE_PATH_FIXED.name)
+        else:
+            template = jinja_env.get_template(TEMPLATE_PATH_DHCP.name)
         rendered_content = template.render(final_config)
     except UndefinedError as e:
         raise UndefinedError(f"A variable in the template was not found in YAML configs: {e}")
@@ -127,8 +133,10 @@ def assert_required_paths():
         raise RuntimeError(f"Config directory '{CONFIG_DIR}' missing")
     if not DEFAULT_CONFIG_PATH.exists():
         raise RuntimeError(f"Default config file '{DEFAULT_CONFIG_PATH}' missing")
-    if not TEMPLATE_FILE_PATH.exists():
-        raise RuntimeError(f"Template file '{TEMPLATE_FILE_PATH}' missing")
+    if not TEMPLATE_PATH_FIXED.exists():
+        raise RuntimeError(f"Template file '{TEMPLATE_PATH_FIXED}' missing")
+    if not TEMPLATE_PATH_DHCP.exists():
+        raise RuntimeError(f"Template file '{TEMPLATE_PATH_DHCP}' missing")
 
 
 if __name__ == "__main__":
