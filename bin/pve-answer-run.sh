@@ -18,5 +18,5 @@ source ${ENV_DIR}/bin/activate
 #${BASE_DIR}/bin/answer-server -f ${BASE_DIR}/conf/answer-server_config.py
 
 # Testing sync version
-python3 answer-server-sync.py
+python3 answer-server.py
 
