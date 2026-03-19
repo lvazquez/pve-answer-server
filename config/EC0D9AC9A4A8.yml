@@ -6,7 +6,9 @@
 # global cluster config
 network_dns: "172.31.31.99"
 network_gateway: "172.31.31.99"
+network_domain: "livewiretech.internal"
 
-server_hostname: "pve-node04.noc.livewiretech.com"
+# local config
+server_hostname: "pve-node4"
 server_address: "172.31.31.21/24"
 

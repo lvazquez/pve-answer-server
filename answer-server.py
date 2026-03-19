@@ -65,6 +65,9 @@ def create_answer(request_data: dict) -> str:
 
     # Search for MAC-specific config and STOP at the first match
     mac_config = None
+    # Variable to store the exact MAC that matched
+    mac_matched = None
+    
     for nic in request_data.get("network_interfaces", []):
         mac = nic.get("mac")
         if not mac:
@@ -72,12 +75,17 @@ def create_answer(request_data: dict) -> str:
         mac_config = lookup_config_for_mac(mac)
         if mac_config is not None:
             logging.info(f"Match found for MAC: {mac}. Applying specific configuration.")
+            # Save the original MAC string from the request payload
+            mac_matched = mac
             # Stop searching once the first matching configuration is found
             break 
 
     # If MAC-specific config is found, merge it over defaults
     if mac_config is not None:
         final_config.update(mac_config)
+        
+        # Dynamically inject the matched MAC into the configuration dictionary.
+        final_config['pve_mac_address'] = mac_matched
     else:
         logging.info("No MAC-specific config found. Using default values only.")
 
@@ -103,10 +111,14 @@ def create_answer(request_data: dict) -> str:
     return rendered_content
 
 def lookup_config_for_mac(mac: str) -> Optional[dict]:
-    mac = mac.lower()
-    # Looking for config/mac_address.yml
+    # Sanitize the incoming MAC address by making it lowercase AND stripping colons.
+    # Example: "BC:24:11:BA:C1:AF" -> "bc2411bac1af"
+    mac_cleaned = mac.lower().replace(':', '')
+    
+    # Looking for config/<mac_cleaned>.yml
     for filename in CONFIG_DIR.glob("*.yml"):
-        if filename.name.lower().startswith(mac):
+        # Safely compare the lowercase filename against the sanitized MAC
+        if filename.name.lower().startswith(mac_cleaned):
             return load_yaml(filename)
     return None
 
@@ -128,3 +140,4 @@ if __name__ == "__main__":
     
     print("Starting Jinja2-TOML Answer Server on port 8000...")
     web.run_app(app, host="0.0.0.0", port=8000)
+    

@@ -7,8 +7,8 @@
 # global cluster config
 network_dns: "172.31.31.99"
 network_gateway: "172.31.31.99"
-
+network_domain: "livewiretech.internal"
 
 # server specific config
-server_hostname: 'node01.example.com'
+server_hostname: 'node01'
 server_address: '"172.31.31.199/24'

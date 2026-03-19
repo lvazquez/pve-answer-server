@@ -2,8 +2,7 @@
 ##################################
 ## pve server answer config     ##
 ##################################
-pve_mac_address: "BC:24:11:BA:C1:AF"
 
-server_hostname: "pve-node01.noc.livewiretech.com"
+server_hostname: "pve-node1"
 server_address: "172.31.31.111/24"
 
